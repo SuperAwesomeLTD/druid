@@ -131,6 +131,7 @@
         <module>extensions-contrib/druid-rocketmq</module>
         <module>extensions-contrib/cloudfiles-extensions</module>
         <module>extensions-contrib/graphite-emitter</module>
+        <module>extensions-contrib/datadog-emitter</module>
         <module>extensions-contrib/kafka-eight-simpleConsumer</module>
         <module>extensions-contrib/rabbitmq</module>
         <module>extensions-contrib/distinctcount</module>
