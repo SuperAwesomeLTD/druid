@@ -125,9 +125,8 @@ public class DatadogEmitter implements Emitter
       for (Emitter emitter : emitterList) {
         emitter.emit(event);
       }
-    } else {
-      throw new ISE("unknown event type [%s]", event.getClass());
     }
+    //Just ingore for now
   }
 
   private class ConsumerRunnable implements Runnable

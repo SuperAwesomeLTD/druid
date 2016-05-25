@@ -70,7 +70,8 @@ public class SendAllDatadogEventConverter implements DruidToDatadogEventConverte
     Map<String, Object> userDims = serviceMetricEvent.getUserDims();
     List<String> tags = new ArrayList<>();
     for (Map.Entry<String, Object> values : userDims.entrySet()) {
-      tags.add(String.format("%s:%s", values.getKey(), values.getValue()));
+      if(!values.getKey().contains("context") && !values.getKey().contains("id"))
+        tags.add(String.format("%s:%s", values.getKey(), values.getValue()));
     }
     for (Map.Entry<String, String> values : this.datadogEmitterConfig.getTagsMap().entrySet()) {
       tags.add(String.format("%s:%s", values.getKey(), values.getValue()));
