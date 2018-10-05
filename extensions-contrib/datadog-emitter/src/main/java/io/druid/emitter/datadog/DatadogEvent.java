@@ -22,11 +22,9 @@ package io.druid.emitter.datadog;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
-import java.util.Map;
 
 
-public class DatadogEvent
-{
+public class DatadogEvent {
   private String metric;
   private Long[][] points;
   private String type;
@@ -38,13 +36,12 @@ public class DatadogEvent
    * ex:  PRODUCTION.host.graphite-tutorial.responseTime.p95 0.10 1400509112
    */
   DatadogEvent(
-      @NotNull String metric,
-      @NotNull Long[][] points,
-      @NotNull String type,
-      @NotNull String host,
-      @NotNull List<String> tags
-  )
-  {
+          @NotNull String metric,
+          @NotNull Long[][] points,
+          @NotNull String type,
+          @NotNull String host,
+          @NotNull List<String> tags
+  ) {
 
     this.metric = metric;
     this.points = points;
@@ -53,28 +50,23 @@ public class DatadogEvent
     this.tags = tags;
   }
 
-  public String getMetric()
-  {
+  public String getMetric() {
     return metric;
   }
 
-  public Long[][] getPoints()
-  {
+  public Long[][] getPoints() {
     return points;
   }
 
-  public String getType()
-  {
+  public String getType() {
     return type;
   }
 
-  public String getHost()
-  {
+  public String getHost() {
     return host;
   }
 
-  public List<String> getTags()
-  {
+  public List<String> getTags() {
     return tags;
   }
 }

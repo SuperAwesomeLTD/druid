@@ -23,14 +23,11 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.Preconditions;
 
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 
-public class DatadogEmitterConfig
-{
+public class DatadogEmitterConfig {
   private final static int DEFAULT_BATCH_SIZE = 100;
   private static final Long DEFAULT_FLUSH_PERIOD = (long) (60 * 1000); // flush every one minute
 
@@ -51,40 +48,37 @@ public class DatadogEmitterConfig
 
   @JsonCreator
   public DatadogEmitterConfig(
-      @JsonProperty("batchSize") Integer batchSize,
-      @JsonProperty("flushPeriod") Long flushPeriod,
-      @JsonProperty("maxQueueSize") Integer maxQueueSize,
-      @JsonProperty("apiKey") String apiKey,
-      @JsonProperty("namespace") String namespace,
-      @JsonProperty("tags") String tags,
-      @JsonProperty("apiUrl") String apiUrl
-  )
-  {
+          @JsonProperty("batchSize") Integer batchSize,
+          @JsonProperty("flushPeriod") Long flushPeriod,
+          @JsonProperty("maxQueueSize") Integer maxQueueSize,
+          @JsonProperty("apiKey") String apiKey,
+          @JsonProperty("namespace") String namespace,
+          @JsonProperty("tags") String tags,
+          @JsonProperty("apiUrl") String apiUrl
+  ) {
     this.flushPeriod = flushPeriod == null ? DEFAULT_FLUSH_PERIOD : flushPeriod;
     this.namespace = namespace;
     this.maxQueueSize = maxQueueSize == null ? Integer.MAX_VALUE : maxQueueSize;
     this.apiKey = Preconditions.checkNotNull(apiKey, "apiKey can not be null");
     this.batchSize = (batchSize == null) ? DEFAULT_BATCH_SIZE : batchSize;
     this.tags = tags;
-    this.apiUrl = apiUrl == null ? "https://app.datadoghq.com/api" : apiUrl ;
+    this.apiUrl = apiUrl == null ? "https://app.datadoghq.com/api" : apiUrl;
   }
 
   @JsonProperty
-  public int getBatchSize()
-  {
+  public int getBatchSize() {
     return batchSize;
   }
 
   @JsonProperty
-  public String getTags()
-  {
+  public String getTags() {
     return tags;
   }
 
-  public Map<String,String> getTagsMap(){
+  public Map<String, String> getTagsMap() {
     HashMap<String, String> map = new HashMap<>();
     String tags = this.getTags();
-    if(tags == null){
+    if (tags == null) {
       return map;
     }
     String[] split = tags.split(",");
@@ -98,32 +92,27 @@ public class DatadogEmitterConfig
   }
 
   @JsonProperty
-  public Integer getMaxQueueSize()
-  {
+  public Integer getMaxQueueSize() {
     return maxQueueSize;
   }
 
   @JsonProperty
-  public Long getFlushPeriod()
-  {
+  public Long getFlushPeriod() {
     return flushPeriod;
   }
 
   @JsonProperty
-  public String getApiKey()
-  {
+  public String getApiKey() {
     return apiKey;
   }
 
   @JsonProperty
-  public String getApiUrl()
-  {
+  public String getApiUrl() {
     return apiUrl;
   }
 
   @JsonProperty
-  public String getNamespace()
-  {
+  public String getNamespace() {
     return namespace;
   }
 }

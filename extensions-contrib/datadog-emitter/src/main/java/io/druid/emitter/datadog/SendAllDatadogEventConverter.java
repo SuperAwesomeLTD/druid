@@ -19,23 +19,15 @@
 
 package io.druid.emitter.datadog;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.google.common.base.Joiner;
-import com.google.common.base.Preconditions;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableSortedSet;
-import com.metamx.emitter.service.ServiceMetricEvent;
+import io.druid.java.util.emitter.service.ServiceMetricEvent;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Emits all the events instance of {@link com.metamx.emitter.service.ServiceMetricEvent}.
+ * Emits all the events instance of {@link io.druid.java.util.emitter.service.ServiceMetricEvent}.
  * <p>
  * All the dimensions will be retained and lexicographically order using dimensions name.
  * <p>
@@ -45,22 +37,19 @@ import java.util.concurrent.TimeUnit;
  * Note that this path will be sanitized by replacing all the `.` or `space` to `_` {@link DatadogEmitter#sanitize(String)}
  */
 
-public class SendAllDatadogEventConverter implements DruidToDatadogEventConverter
-{
+public class SendAllDatadogEventConverter implements DruidToDatadogEventConverter {
 
   private final DatadogEmitterConfig datadogEmitterConfig;
 
-  public SendAllDatadogEventConverter(DatadogEmitterConfig datadogEmitterConfig)
-  {
+  public SendAllDatadogEventConverter(DatadogEmitterConfig datadogEmitterConfig) {
     this.datadogEmitterConfig = datadogEmitterConfig;
   }
 
   @Override
-  public DatadogEvent druidEventToDatadog(ServiceMetricEvent serviceMetricEvent)
-  {
+  public DatadogEvent druidEventToDatadog(ServiceMetricEvent serviceMetricEvent) {
     final Long[][] points = new Long[1][2];
     points[0][0] = TimeUnit.MILLISECONDS.toSeconds(serviceMetricEvent.getCreatedTime()
-                                                                     .getMillis());
+            .getMillis());
     points[0][1] = serviceMetricEvent.getValue().longValue();
 
     String metric = DatadogEmitter.sanitize(serviceMetricEvent.getMetric());
@@ -70,7 +59,7 @@ public class SendAllDatadogEventConverter implements DruidToDatadogEventConverte
     Map<String, Object> userDims = serviceMetricEvent.getUserDims();
     List<String> tags = new ArrayList<>();
     for (Map.Entry<String, Object> values : userDims.entrySet()) {
-      if(!values.getKey().contains("context") && !values.getKey().contains("id")
+      if (!values.getKey().contains("context") && !values.getKey().contains("id")
               && !values.getKey().contains("duration") && !values.getKey().contains("interval"))
         tags.add(String.format("%s:%s", values.getKey(), values.getValue()));
     }

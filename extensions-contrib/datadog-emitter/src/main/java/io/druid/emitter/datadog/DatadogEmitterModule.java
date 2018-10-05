@@ -29,43 +29,39 @@ import com.google.inject.Key;
 import com.google.inject.Provides;
 import com.google.inject.name.Named;
 import com.google.inject.name.Names;
-import com.metamx.emitter.core.Emitter;
 import io.druid.guice.JsonConfigProvider;
 import io.druid.guice.ManageLifecycle;
 import io.druid.initialization.DruidModule;
+import io.druid.java.util.emitter.core.Emitter;
 
 import java.util.Collections;
 import java.util.List;
 
-public class DatadogEmitterModule implements DruidModule
-{
+public class DatadogEmitterModule implements DruidModule {
   private static final String EMITTER_TYPE = "datadog";
+
   @Override
-  public List<? extends Module> getJacksonModules()
-  {
+  public List<? extends Module> getJacksonModules() {
     return Collections.EMPTY_LIST;
   }
 
   @Override
-  public void configure(Binder binder)
-  {
+  public void configure(Binder binder) {
     JsonConfigProvider.bind(binder, "druid.emitter." + EMITTER_TYPE, DatadogEmitterConfig.class);
   }
 
   @Provides
   @ManageLifecycle
   @Named(EMITTER_TYPE)
-  public Emitter getEmitter(DatadogEmitterConfig datadogEmitterConfig, ObjectMapper mapper, final Injector injector){
+  public Emitter getEmitter(DatadogEmitterConfig datadogEmitterConfig, ObjectMapper mapper, final Injector injector) {
     List<Emitter> emitters = Lists.transform(
-        Collections.<String>emptyList(),
-        new Function<String, Emitter>()
-        {
-          @Override
-          public Emitter apply(String s)
-          {
-            return injector.getInstance(Key.get(Emitter.class, Names.named(s)));
-          }
-        }
+            Collections.<String>emptyList(),
+            new Function<String, Emitter>() {
+              @Override
+              public Emitter apply(String s) {
+                return injector.getInstance(Key.get(Emitter.class, Names.named(s)));
+              }
+            }
     );
     return new DatadogEmitter(datadogEmitterConfig, emitters);
   }
