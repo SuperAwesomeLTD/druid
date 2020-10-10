@@ -44,12 +44,12 @@
         <dependency>
             <groupId>com.google.apis</groupId>
             <artifactId>google-api-services-storage</artifactId>
-            <version>v1-rev79-1.22.0</version>
+            <version>v1beta1-rev20180620-1.28.0</version>
         </dependency>
         <dependency>
             <groupId>com.google.http-client</groupId>
             <artifactId>google-http-client-jackson2</artifactId>
-            <version>1.22.0</version>
+            <version>1.28.0</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.module</groupId>
