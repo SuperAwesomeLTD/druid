@@ -84,7 +84,7 @@
         <aws.sdk.bundle.version>1.11.199</aws.sdk.bundle.version>
         <caffeine.version>2.5.5</caffeine.version>
         <!-- When upgrading ZK, edit docs and integration tests as well (integration-tests/docker-base/setup.sh) -->
-        <zookeeper.version>3.4.11</zookeeper.version>
+        <zookeeper.version>3.5.5</zookeeper.version>
         <repoOrgId>org-apache-id</repoOrgId>
         <repoOrgName>org-apache-name</repoOrgName>
         <repoOrgUrl>https://repository.apache.org/content/repositories/public/</repoOrgUrl>
