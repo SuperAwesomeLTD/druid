@@ -64,7 +64,7 @@
         <avatica.version>1.10.0</avatica.version>
         <calcite.version>1.15.0</calcite.version>
         <fastutil.version>8.1.0</fastutil.version>
-        <guava.version>16.0.1</guava.version>
+        <guava.version>30.0-android</guava.version>
         <guice.version>4.1.0</guice.version>
         <jetty.version>9.3.19.v20170502</jetty.version>
         <jersey.version>1.19.3</jersey.version>
